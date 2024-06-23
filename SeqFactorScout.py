@@ -48,7 +48,7 @@ def main(jaspar_file, fasta_file, output_file, threshold_percentage, choice, win
                 matches.append((transcript_id, gene_id, start, end, sequence[pos:pos+motif.length], score, pssm.max, percentage_max, strand))
             
             if matches:
-                df = pd.DataFrame(matches, columns=['Transcript ID', 'Gene ID', 'Start', 'End', 'Motif Sequence', 'Score', 'Max Possible Score', 'Percentage of Maximum Possible Score', 'Direction'])
+                df = pd.DataFrame(matches, columns=['Transcript ID', 'Gene ID', 'Start', 'End', 'TFBS Sequence', 'Score', 'Max Possible Score', 'Percentage of Maximum Possible Score', 'Direction'])
                 dfs.append(df)
     
     result_df = pd.concat(dfs, ignore_index=True)
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         [sg.Text('Progress:', size=(8, 1)), sg.ProgressBar(1000, orientation='h', size=(52, 20), key='progress')]
     ]
  
-    window = sg.Window('Sequence Motif Algorithm', layout)
+    window = sg.Window('Sequence TFBS Algorithm', layout)
 
     while True:
         event, values = window.read(timeout=100)
