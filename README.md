@@ -7,8 +7,8 @@ This tool analyzes FASTA sequences and uses JASPAR files to find and score poten
     git clone https://github.com/aidanmeyers/SeqFactorScout.git
     cd SeqFactorScout
 ### Step 2: Set up virtual environment
-    python -m venv SeqFinderScout
-For simplicity, I've named the virtual environment "SeqFinderScout." You can name it whatever you would like, however.
+    python -m venv SeqFactorScout
+For simplicity, I've named the virtual environment "SeqFactorScout." You can name it whatever you would like, however.
 ### Step 3: Activate virtual environment
 #### Windows
     .\SeqFactorScout\Scripts\activate
