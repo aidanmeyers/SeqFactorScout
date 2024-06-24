@@ -22,6 +22,12 @@ For simplicity, I've named the virtual environment "SeqFactorScout." You can nam
     python SeqFactorScout.py
 
 ## Inputs
+### JASPAR file 
+The JASPAR file stores transcription factor binding profiles in a number of different formats, but the one that SeqFactorScout uses is the JASPAR file format. The JASPAR file contains a position frequency matrix which SeqFactorScout uses to find and score potential binding sites. 
+
+JASPAR profiles can be downloaded from the [JASPAR database](https://jaspar.elixir.no/). 
+
+To learn more about JASPAR, please refer to the [JASPAR documentation](https://jaspar.elixir.no/docs/#jaspar-format). 
 
 ## Algorithm Details
 
