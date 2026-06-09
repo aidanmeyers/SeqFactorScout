@@ -42,13 +42,13 @@ pip install -r requirements.txt
 SeqFactorScout is run from the command line:
 
 ```
-python seqfactor.py <jaspar_file> <fasta_file> <output_file> [options]
+python SeqFactorScout.py <jaspar_file> <fasta_file> <output_file> [options]
 ```
 
 ### Example
 
 ```
-python seqfactor.py atfs-1.jaspar glycolysis.fasta results.xlsx -t 80 -r upstream
+python SeqFactorScout.py atfs-1.jaspar glycolysis.fasta results.xlsx -t 80 -r upstream
 ```
 
 ### Arguments
