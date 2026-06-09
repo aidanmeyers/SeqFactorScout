@@ -1,51 +1,91 @@
 # SeqFactorScout
-This tool analyzes FASTA sequences and uses JASPAR files to find and score potential transcription factor binding sites. It utilizes a graphical user interface (GUI) built with PySimpleGUI for ease of use.
 
-**Note: This repository is still under construction!**
+SeqFactorScout is a simple Python script for analyzing FASTA sequences to identify transcription factor binding sites using JASPAR position frequency matrices. Works well for genome-scale analysis, it scans sequences on both strands, scores potential binding sites against a motif's position-specific scoring matrix, and writes the results to an Excel file.
+
 ## Installation
-### Step 1: Clone repository
-    git clone https://github.com/aidanmeyers/SeqFactorScout.git
-    cd SeqFactorScout
-### Step 2: Set up virtual environment
-    python -m venv SeqFactorScout
-For simplicity, I've named the virtual environment "SeqFactorScout." You can name it whatever you would like, however.
-### Step 3: Activate virtual environment
-#### Windows
-    .\SeqFactorScout\Scripts\activate
-#### macOS/Linux
-    source SeqFactorScout/bin/activate
+
+### Step 1: Clone the repository
+
+```
+git clone https://github.com/aidanmeyers/SeqFactorScout.git
+cd SeqFactorScout
+```
+
+### Step 2: Set up a virtual environment
+
+```
+python -m venv SeqFactorScout
+```
+
+### Step 3: Activate the virtual environment
+
+**Windows**
+
+```
+.\venv\Scripts\activate
+```
+
+**macOS/Linux**
+
+```
+source venv/bin/activate
+```
+
 ### Step 4: Install requirements
-    pip install -r requirements.txt
+
+```
+pip install -r requirements.txt
+```
+
 ## Usage
-### 1. Ensure virtual environment is activated
-### 2. Run the tool
-    python SeqFactorScout.py
+
+SeqFactorScout is run from the command line:
+
+```
+python seqfactor.py <jaspar_file> <fasta_file> <output_file> [options]
+```
+
+### Example
+
+```
+python seqfactor.py atfs-1.jaspar glycolysis.fasta results.xlsx -t 80 -r upstream
+```
+
+### Arguments
+
+| Argument | Description |
+| --- | --- |
+| `jaspar_file` | Path to the JASPAR motif file (PFM). |
+| `fasta_file` | Path to the input FASTA file. |
+| `output_file` | Path to the output `.xlsx` file (the extension is added automatically if omitted). |
+
+### Options
+
+| Option | Description |
+| --- | --- |
+| `-t`, `--threshold` | Minimum score threshold as a percentage of the motif's maximum possible score (0–100). Higher is more stringent. Default: `75`. |
+| `-r`, `--region` | Region context for position reporting: `upstream`, `downstream`, or `other`. Default: `upstream`. |
 
 ## Inputs
-### JASPAR file 
-The JASPAR file stores transcription factor binding profiles in a number of different formats, but the one that SeqFactorScout uses is the JASPAR file format. The JASPAR file contains a position frequency matrix which SeqFactorScout uses to find and score potential binding sites. 
 
-JASPAR profiles can be downloaded from the [JASPAR database](https://jaspar.elixir.no/). 
+### JASPAR file
 
-To learn more about JASPAR, please refer to the [JASPAR documentation](https://jaspar.elixir.no/docs/#jaspar-format). 
+The JASPAR file stores a transcription factor binding profile as a position frequency matrix, which SeqFactorScout uses to find and score potential binding sites. Profiles can be downloaded from the [JASPAR database](https://jaspar.elixir.no/). To learn more about the format, see the [JASPAR documentation](https://jaspar.elixir.no/docs/#jaspar-format).
 
-## Algorithm Details
+### FASTA file
 
-## Contributing
+A standard FASTA file of the sequences to scan. Headers are expected in the form:
+
+```
+>gene-name|transcript-id
+```
+
+For example, `>gpd-2|K10B3.8.1` is parsed as gene `gpd-2`, transcript `K10B3.8.1`.
+
+## Output
+
+The tool writes an Excel (`.xlsx`) file with one row per match, including the transcript and gene IDs, start and end positions, the matched sequence, its raw score, the maximum possible score, the percentage of maximum, and the strand (direct or reverse).
 
 ## License
 
-## Additional Information Regarding PySimpleGUI Licensing
-
-**TL;DR: This tool's GUI was created using PySimpleGUI, which has a non-open source license. As a hobbyist developer, anyone using this application will see PySimpleGUI asking you to register to use their product. If you are using this tool for any non-commercial work, such as academic research, you will not have to pay for PySimpleGUI. You can either: 1) Use the 31-day trial and/or 2) Register as a hobbyist. If you use this tool for any commercial purpose, please register for a commercial license.**
-
-The graphical user interface for this tool uses PySimpleGUI version 5.0.2. Please note that starting from version 5, PySimpleGUI transitioned from being completely open-source to having an open-source code but not an open-source license. Here are some key points about the PySimpleGUI license:
-
-- **Hobbyist Developers**: If you are a Hobbyist Developer, you can use PySimpleGUI for non-commercial purposes at no cost. You will need to refresh your Hobbyist Developer License annually.
-- **Commercial Developers**: If you are not a Hobbyist Developer, you are considered a Commercial Developer, and you or your company must purchase a perpetual license for $99, which includes one year of free upgrades and priority support.
-
-"Hobbyist Developer" means any individual who uses PySimpleGUI for development purposes solely for either or both of the following: (1) personal (e.g., not on behalf of an employer or other third party), non-commercial purposes; or (2) non-commercial educational or learning purposes (together, the "Permitted No-cost Purposes"). "Commercial Developer" means any individual who uses PySimpleGUI for development purposes who is not a Hobbyist Developer.
-
-For the sake of clarity, this licensing structure unequivocally qualifies me as a "Hobbyist Developer" under the PySimpleGUI license. I created this script in my free time, driven by a desire to simplify existing workflows for identifying transcription factor binding profiles. My primary intention was and always has been educational, both as an exercise in Python programming and as a means to facilitate the advancement of academic research. This project was entirely my own initiative, and although I am a student employee at the University of Alabama, at no point was I directed by the University of Alabama as an institution or any faculty member to undertake this work. From the project's inception, I have been committed to making this algorithm open source, firmly believing that there should be no financial or bureaucratic barriers to using this tool. Therefore, given these facts, I, as well as anyone else using this tool for non-commercial research, would be considered hobbyists.
-
-For more details, please refer to the PySimpleGUI [License Agreement](https://pysimplegui.com/eula).
+This project is licensed under the GPL-3.0 License. See the [LICENSE](LICENSE) file for details.
