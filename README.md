@@ -14,7 +14,7 @@ cd SeqFactorScout
 ### Step 2: Set up a virtual environment
 
 ```
-python -m venv SeqFactorScout
+python -m venv venv
 ```
 
 ### Step 3: Activate the virtual environment
